@@ -1,7 +1,8 @@
 var Gpio = require('onoff').Gpio;
 
-var step = new Gpio(18,'out');
-var direction = new Gpio(16,'out');
+// BCM GPIO NOTATION
+var step = new Gpio(23,'out');
+var direction = new Gpio(24,'out');
 
 
 // Toggle the state of the LED on GPIO #14 every 200ms.
