@@ -14,11 +14,10 @@ direction.writeSync(0);
 
 var count = 0;
 iv = setInterval(function () {
-	console.log('stat to: ', step.readSync());
   	step.writeSync(step.readSync() ^ 1);
 	step.writeSync(step.readSync() ^ 1);
 	count++;
-	if (count == 201) {
+	if (count == 200) {
 		clearInterval(iv); // Stop blinking
 		step.writeSync(0);  // Turn LED off.
 		console.log('Ts: ', moment().format('mm:ss'),'count:', count);
