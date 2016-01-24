@@ -24,7 +24,7 @@ iv = setInterval(function () {
 setTimeout(function () {
   clearInterval(iv); // Stop blinking
   step.writeSync(0);  // Turn LED off.
-  console.log('Ts: ', moment().format('mm:ss', 'count:', count));
+  console.log('Ts: ', moment().format('mm:ss'),'count:', count);
 }, 2000);
 
 
