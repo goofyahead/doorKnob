@@ -6,6 +6,7 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "moment": "^2.11.1",
     "onoff": "1.0.3"
   }
 }
