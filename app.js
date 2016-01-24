@@ -18,14 +18,19 @@ iv = setInterval(function () {
   	step.writeSync(step.readSync() ^ 1);
 	step.writeSync(step.readSync() ^ 1);
 	count++;
+	if (count == 201) {
+		clearInterval(iv); // Stop blinking
+		step.writeSync(0);  // Turn LED off.
+		console.log('Ts: ', moment().format('mm:ss'),'count:', count);
+	}
 }, 10);
 
-// Stop blinking the LED and turn it off after 5 seconds.
-setTimeout(function () {
-  clearInterval(iv); // Stop blinking
-  step.writeSync(0);  // Turn LED off.
-  console.log('Ts: ', moment().format('mm:ss'),'count:', count);
-}, 2000);
+// // Stop blinking the LED and turn it off after 5 seconds.
+// setTimeout(function () {
+//   clearInterval(iv); // Stop blinking
+//   step.writeSync(0);  // Turn LED off.
+//   console.log('Ts: ', moment().format('mm:ss'),'count:', count);
+// }, 2000);
 
 
 function exit() {
