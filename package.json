@@ -1,0 +1,11 @@
+{
+  "name": "DoorKnob",
+  "version": "0.0.1",
+  "description": "Door knob opening system",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "onoff": "1.0.3"
+  }
+}
