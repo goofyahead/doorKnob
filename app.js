@@ -9,19 +9,23 @@ var direction = new Gpio(24,'out');
 // Toggle the state of the LED on GPIO #14 every 200ms.
 // Here synchronous methods are used. Asynchronous methods are also available.
 
-console.log('Ts: ', moment().format('mm:ss');
+console.log('Ts: ', moment().format('mm:ss'));
 direction.writeSync(0);
+
+var count = 0;
 iv = setInterval(function () {
 	console.log('stat to: ', step.readSync());
-  	step.writeSync(step.readSync() ^ 1); // 1 = on, 0 = off :)
-}, 50);
+  	step.writeSync(step.readSync() ^ 1);
+	step.writeSync(step.readSync() ^ 1);
+	count++;
+}, 10);
 
 // Stop blinking the LED and turn it off after 5 seconds.
 setTimeout(function () {
   clearInterval(iv); // Stop blinking
   step.writeSync(0);  // Turn LED off.
-  console.log('Ts: ', moment().format('mm:ss');
-}, 10000);
+  console.log('Ts: ', moment().format('mm:ss', 'count:', count));
+}, 2000);
 
 
 function exit() {
