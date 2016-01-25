@@ -31,7 +31,7 @@ app.get('/open', function(req, res){
 
 app.get('/close', function(req, res){
 
-	direction.writeSync(0);
+	direction.writeSync(1);
 
 	var count = 0;
 	iv = setInterval(function () {
