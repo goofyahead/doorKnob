@@ -14,7 +14,7 @@ var opentotal = 50;
 // Here synchronous methods are used. Asynchronous methods are also available.
 
 app.get('/open', function(req, res){
-	direction.writeSync(0);
+	direction.writeSync(1);
 	var limitOpen = (200 * keyPosition) + opentotal;
 	var countopen = 0;
 
@@ -23,7 +23,7 @@ app.get('/open', function(req, res){
 			clearInterval(ivopen); // Stop blinking
 			console.log('Opening');
 			setTimeout(function () {
-				direction.writeSync(1);
+				direction.writeSync(0);
 				var countZero = 0;
 		// go to zero
 		ivgotozero = setInterval(function () {
@@ -51,7 +51,7 @@ app.get('/open', function(req, res){
 
 app.get('/close', function(req, res){
 
-	direction.writeSync(1);
+	direction.writeSync(0);
 	var limitClose = (200 * (2 - keyPosition));
 
 	var count = 0;
