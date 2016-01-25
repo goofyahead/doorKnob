@@ -16,13 +16,13 @@ var opentotal = 50;
 app.get('/open', function(req, res){
 	direction.writeSync(0);
 	var limitOpen = (200 * keyPosition) + opentotal;
-	var countopen = 1;
+	var countopen = 0;
 
 	ivopen = setInterval(function () {
 		step.writeSync(step.readSync() ^ 1);
 		step.writeSync(step.readSync() ^ 1);
 		countopen++;
-		if (countopen == limitOpen) {
+		if (countopen < limitOpen) {
 			clearInterval(ivopen); // Stop blinking
 			console.log('Opening');
 		}
@@ -53,12 +53,12 @@ app.get('/close', function(req, res){
 	direction.writeSync(1);
 	var limitClose = (200 * (2 - keyPosition));
 
-	var count = 1;
+	var count = 0;
 	iv = setInterval(function () {
 		step.writeSync(step.readSync() ^ 1);
 		step.writeSync(step.readSync() ^ 1);
 		count++;
-		if (count == limitClose) {
+		if (count < limitClose) {
 			keyPosition = 2;
 			clearInterval(iv); // Stop blinking
 			console.log('Ts: ', moment().format('mm:ss'),'count:', count);
