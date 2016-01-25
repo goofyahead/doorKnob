@@ -24,8 +24,7 @@ app.get('/open', function(req, res){
 		countopen++;
 		if (countopen == limitOpen) {
 			clearInterval(ivopen); // Stop blinking
-			step.writeSync(0);  // Turn LED off.
-			console.log('Ts: ', moment().format('mm:ss'),'count:', countopen);
+			console.log('Opening');
 		}
 	}, 10);
 
@@ -33,16 +32,15 @@ app.get('/open', function(req, res){
 		var countZero = 0;
 		// go to zero
 		ivgotozero = setInterval(function () {
-		step.writeSync(step.readSync() ^ 1);
-		step.writeSync(step.readSync() ^ 1);
-		countZero++;
-		if (countopen == 50) {
-			keyPosition = 0;
-			clearInterval(ivgotozero); // Stop blinking
-			step.writeSync(0);  // Turn LED off.
-			console.log('Door in normal position again');
-		}
-	}, 10);
+			step.writeSync(step.readSync() ^ 1);
+			step.writeSync(step.readSync() ^ 1);
+			countZero++;
+			if (countZero == 50) {
+				keyPosition = 0;
+				clearInterval(ivgotozero); // Stop blinking
+				console.log('Door in normal position again');
+			}
+		}, 10);
 
 	}, 3000);
 
@@ -62,7 +60,6 @@ app.get('/close', function(req, res){
 		if (count == limitClose) {
 			keyPosition = 2;
 			clearInterval(iv); // Stop blinking
-			step.writeSync(0);  // Turn LED off.
 			console.log('Ts: ', moment().format('mm:ss'),'count:', count);
 		}
 	}, 10);
