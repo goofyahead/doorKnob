@@ -8,7 +8,7 @@ var step = new Gpio(23,'out');
 var direction = new Gpio(24,'out');
 
 var keyPosition = 0;
-var opentotal = 50;
+var opentotal = 120;
 
 // Toggle the state of the LED on GPIO #14 every 200ms.
 // Here synchronous methods are used. Asynchronous methods are also available.
