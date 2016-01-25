@@ -22,7 +22,7 @@ app.get('/open', function(req, res){
 		if (countopen == 200) {
 			clearInterval(ivopen); // Stop blinking
 			step.writeSync(0);  // Turn LED off.
-			console.log('Ts: ', moment().format('mm:ss'),'count:', count);
+			console.log('Ts: ', moment().format('mm:ss'),'count:', countopen);
 		}
 	}, 10);
 
