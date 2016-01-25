@@ -22,7 +22,7 @@ app.get('/open', function(req, res){
 		step.writeSync(step.readSync() ^ 1);
 		step.writeSync(step.readSync() ^ 1);
 		countopen++;
-		if (countopen < limitOpen) {
+		if (countopen >= limitOpen) {
 			clearInterval(ivopen); // Stop blinking
 			console.log('Opening');
 		}
@@ -58,7 +58,7 @@ app.get('/close', function(req, res){
 		step.writeSync(step.readSync() ^ 1);
 		step.writeSync(step.readSync() ^ 1);
 		count++;
-		if (count < limitClose) {
+		if (count >= limitClose) {
 			keyPosition = 2;
 			clearInterval(iv); // Stop blinking
 			console.log('Ts: ', moment().format('mm:ss'),'count:', count);
