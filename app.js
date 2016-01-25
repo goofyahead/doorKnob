@@ -14,13 +14,13 @@ var direction = new Gpio(24,'out');
 app.get('/open', function(req, res){
 	direction.writeSync(0);
 
-	var count = 0;
-	iv = setInterval(function () {
+	var countopen = 0;
+	ivopen = setInterval(function () {
 		step.writeSync(step.readSync() ^ 1);
 		step.writeSync(step.readSync() ^ 1);
-		count++;
-		if (count == 200) {
-			clearInterval(iv); // Stop blinking
+		countopen++;
+		if (countopen == 200) {
+			clearInterval(ivopen); // Stop blinking
 			step.writeSync(0);  // Turn LED off.
 			console.log('Ts: ', moment().format('mm:ss'),'count:', count);
 		}
