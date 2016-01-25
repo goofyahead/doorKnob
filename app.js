@@ -19,31 +19,32 @@ app.get('/open', function(req, res){
 	var countopen = 0;
 
 	ivopen = setInterval(function () {
-		step.writeSync(step.readSync() ^ 1);
-		step.writeSync(step.readSync() ^ 1);
-		countopen++;
 		if (countopen >= limitOpen) {
 			clearInterval(ivopen); // Stop blinking
 			console.log('Opening');
-		}
-	}, 10);
-
-	setTimeout(function () {
-		direction.writeSync(1);
-		var countZero = 0;
+			setTimeout(function () {
+				direction.writeSync(1);
+				var countZero = 0;
 		// go to zero
 		ivgotozero = setInterval(function () {
-			step.writeSync(step.readSync() ^ 1);
-			step.writeSync(step.readSync() ^ 1);
-			countZero++;
 			if (countZero == 50) {
 				keyPosition = 0;
 				clearInterval(ivgotozero); // Stop blinking
 				console.log('Door in normal position again');
+			} else {
+				step.writeSync(step.readSync() ^ 1);
+				step.writeSync(step.readSync() ^ 1);
+				countZero++;
 			}
 		}, 10);
 
 	}, 3000);
+		} else {
+			step.writeSync(step.readSync() ^ 1);
+			step.writeSync(step.readSync() ^ 1);
+			countopen++;
+		}
+	}, 10);
 
 	res.send('opening');
 });
@@ -55,13 +56,15 @@ app.get('/close', function(req, res){
 
 	var count = 0;
 	iv = setInterval(function () {
-		step.writeSync(step.readSync() ^ 1);
-		step.writeSync(step.readSync() ^ 1);
-		count++;
+
 		if (count >= limitClose) {
 			keyPosition = 2;
 			clearInterval(iv); // Stop blinking
 			console.log('Ts: ', moment().format('mm:ss'),'count:', count);
+		} else {
+			step.writeSync(step.readSync() ^ 1);
+			step.writeSync(step.readSync() ^ 1);
+			count++;
 		}
 	}, 10);
 
