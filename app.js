@@ -29,6 +29,7 @@ app.get('/open', function(req, res){
 	}, 10);
 
 	setTimeout(function () {
+		direction.writeSync(1);
 		var countZero = 0;
 		// go to zero
 		ivgotozero = setInterval(function () {
