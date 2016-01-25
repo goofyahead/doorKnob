@@ -25,20 +25,19 @@ app.get('/open', function(req, res){
 			setTimeout(function () {
 				direction.writeSync(0);
 				var countZero = 0;
-		// go to zero
-		ivgotozero = setInterval(function () {
-			if (countZero == 50) {
-				keyPosition = 0;
-				clearInterval(ivgotozero); // Stop blinking
-				console.log('Door in normal position again');
-			} else {
-				step.writeSync(step.readSync() ^ 1);
-				step.writeSync(step.readSync() ^ 1);
-				countZero++;
-			}
-		}, 10);
-
-	}, 3000);
+				// go to zero
+				ivgotozero = setInterval(function () {
+					if (countZero >= opentotal) {
+						keyPosition = 0;
+						clearInterval(ivgotozero); // Stop blinking
+						console.log('Door in normal position again');
+					} else {
+						step.writeSync(step.readSync() ^ 1);
+						step.writeSync(step.readSync() ^ 1);
+						countZero++;
+					}
+				}, 10);
+			}, 3000);
 		} else {
 			step.writeSync(step.readSync() ^ 1);
 			step.writeSync(step.readSync() ^ 1);
