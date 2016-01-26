@@ -8,8 +8,8 @@ var step = new Gpio(23,'out');
 var direction = new Gpio(24,'out');
 
 var keyPosition = 0;
-var opentotal = 140;
-var TWO_TURNS = 200 * 3;
+var opentotal = 300;
+var TWO_TURNS = 200 * 3 * 2; // two turns on a 1:3 gear of a 200 steps
 
 // Toggle the state of the LED on GPIO #14 every 200ms.
 // Here synchronous methods are used. Asynchronous methods are also available.
