@@ -8,14 +8,15 @@ var step = new Gpio(23,'out');
 var direction = new Gpio(24,'out');
 
 var keyPosition = 0;
-var opentotal = 120;
+var opentotal = 140;
+var TWO_TURNS = 200 * 3;
 
 // Toggle the state of the LED on GPIO #14 every 200ms.
 // Here synchronous methods are used. Asynchronous methods are also available.
 
 app.get('/open', function(req, res){
 	direction.writeSync(1);
-	var limitOpen = (200 * keyPosition) + opentotal;
+	var limitOpen = (TWO_TURNS * keyPosition) + opentotal;
 	var countopen = 0;
 
 	ivopen = setInterval(function () {
@@ -36,14 +37,14 @@ app.get('/open', function(req, res){
 						step.writeSync(step.readSync() ^ 1);
 						countZero++;
 					}
-				}, 10);
+				}, 5);
 			}, 3000);
 		} else {
 			step.writeSync(step.readSync() ^ 1);
 			step.writeSync(step.readSync() ^ 1);
 			countopen++;
 		}
-	}, 10);
+	}, 5);
 
 	res.send('opening');
 });
@@ -51,7 +52,7 @@ app.get('/open', function(req, res){
 app.get('/close', function(req, res){
 
 	direction.writeSync(0);
-	var limitClose = (200 * (2 - keyPosition));
+	var limitClose = (TWO_TURNS * (2 - keyPosition));
 
 	var count = 0;
 	iv = setInterval(function () {
@@ -65,7 +66,7 @@ app.get('/close', function(req, res){
 			step.writeSync(step.readSync() ^ 1);
 			count++;
 		}
-	}, 10);
+	}, 5);
 
 	res.send('closing');
 });
