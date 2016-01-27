@@ -6,6 +6,7 @@ var app = express();
 // BCM GPIO NOTATION
 var step = new Gpio(23,'out');
 var direction = new Gpio(24,'out');
+var sleep = new Gpio(25, 'out');
 
 var keyPosition = 0;
 var opentotal = 265;
@@ -15,13 +16,14 @@ var TWO_TURNS = 200 * 3; // two turns on a 1:3 gear of a 200 steps
 // Here synchronous methods are used. Asynchronous methods are also available.
 
 app.get('/open', function(req, res){
+	sleep.writeSync(1); // wake up
 	direction.writeSync(1);
 	var limitOpen = (TWO_TURNS * keyPosition) + opentotal;
 	var countopen = 0;
 
 	ivopen = setInterval(function () {
 		if (countopen >= limitOpen) {
-			clearInterval(ivopen); // Stop blinking
+			clearInterval(ivopen);
 			console.log('Opening');
 			setTimeout(function () {
 				direction.writeSync(0);
@@ -30,8 +32,9 @@ app.get('/open', function(req, res){
 				ivgotozero = setInterval(function () {
 					if (countZero >= opentotal) {
 						keyPosition = 0;
-						clearInterval(ivgotozero); // Stop blinking
+						clearInterval(ivgotozero);
 						console.log('Door in normal position again');
+						sleep.writeSync(0);
 					} else {
 						step.writeSync(step.readSync() ^ 1);
 						step.writeSync(step.readSync() ^ 1);
@@ -50,7 +53,7 @@ app.get('/open', function(req, res){
 });
 
 app.get('/close', function(req, res){
-
+	sleep.writeSync(1); // wake up
 	direction.writeSync(0);
 	var limitClose = (TWO_TURNS * (2 - keyPosition));
 
@@ -61,6 +64,7 @@ app.get('/close', function(req, res){
 			keyPosition = 2;
 			clearInterval(iv); // Stop blinking
 			console.log('Ts: ', moment().format('mm:ss'),'count:', count);
+			sleep.writeSync(0);
 		} else {
 			step.writeSync(step.readSync() ^ 1);
 			step.writeSync(step.readSync() ^ 1);
