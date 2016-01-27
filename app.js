@@ -8,7 +8,7 @@ var step = new Gpio(23,'out');
 var direction = new Gpio(24,'out');
 
 var keyPosition = 0;
-var opentotal = 250;
+var opentotal = 255;
 var TWO_TURNS = 200 * 3; // two turns on a 1:3 gear of a 200 steps
 
 // Toggle the state of the LED on GPIO #14 every 200ms.
