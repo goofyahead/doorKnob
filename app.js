@@ -8,9 +8,11 @@ var colors = require('colors');
 var fs = require('fs');
 var privateKey  = fs.readFileSync(__dirname + '/sslcert/server.key', 'utf8');
 var certificate = fs.readFileSync(__dirname + '/sslcert/server.crt', 'utf8');
-var security = require('./routes/security');
+
 var redis = require("redis"),
 	client = redis.createClient();
+
+var security = require('./routes/security')({redis : client});
 
 var HTTPS_PORT = 443;
 var HTTP_PORT = 80;

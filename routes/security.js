@@ -1,7 +1,6 @@
 module.exports = function initialize (params) {
 
-    var db = params.database;
-    var ObjectId = require('mongodb').ObjectID;
+    var redisClient = params.redis;
     
     module.authorize = function (req, res, next) {
         var challenge = req.query.challenge;
