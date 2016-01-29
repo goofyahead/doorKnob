@@ -14,8 +14,8 @@ var redis = require("redis"),
 
 var security = require('./routes/security')({redis : client});
 
-var HTTPS_PORT = 443;
-var HTTP_PORT = 80;
+var HTTPS_PORT = 1443;
+var HTTP_PORT = 8080;
 
 var credentials = {key: privateKey, cert: certificate};
 var app = express();
