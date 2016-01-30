@@ -42,8 +42,7 @@ var TWO_TURNS = 200 * 3; // two turns on a 1:3 gear of a 200 steps
 // Toggle the state of the LED on GPIO #14 every 200ms.
 // Here synchronous methods are used. Asynchronous methods are also available.
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser());
 app.use(cookieParser());
 
 app.get('/challenge/:user', function (req, res) {
