@@ -4,6 +4,8 @@ var express = require('express');
 var ursa = require('ursa');
 var http = require('http');
 var https = require('https');
+var header = '-----BEGIN PUBLIC KEY-----\n';
+var ending = '\n-----END PUBLIC KEY-----\n';
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
