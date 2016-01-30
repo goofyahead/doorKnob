@@ -91,6 +91,7 @@ app.get('/open', security.authorize, function(req, res){
 });
 
 app.post('/keys', function (req, res){
+	console.log(req.body);
 	var keyToAdd = req.body.key;
 	var name = req.body.name;
 	var pemKey = header + keyToAdd + ending;
