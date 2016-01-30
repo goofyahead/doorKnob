@@ -101,14 +101,14 @@ app.post('/keys', function (req, res){
 	var name = req.body.name;
 	var pemKey = header + keyToAdd + ending;
 
-	redisClient.get('admin', function (reply) {
+	client.get('admin', function (reply) {
 		if (!reply) {
 			var ursaKey = ursa.createPublicKey(new Buffer(pemKey), ursa.BASE64);
 			fs.writeFileSync('./keys/' + name + '.pub', ursaKey.toPublicPem());
 
 			console.log(ursaKey.toPublicPem().toString());
-			redisClient.set('admin', name, redis.print);
-			redisClient.set('key_' + name, 0, redis.print);
+			client.set('admin', name, redis.print);
+			client.set('key_' + name, 0, redis.print);
 			res.send(200, {message : "key added as admin"});
 		} else {
 			res.send(404, {message : "admin already exist require access"});
