@@ -48,7 +48,7 @@ var TWO_TURNS = 200 * 3; // two turns on a 1:3 gear of a 200 steps
 
 app.get('/challenge/:user', function (req, res) {
 	var name = req.params.user;
-	var session = crypto.randomBytes(12).toString('hex').toString().toUpperCase();
+	var session = crypto.randomBytes(6).toString('hex').toString().toUpperCase();
 
 	console.log("session generated" + session);
 	client.setex('user_session_' + name, TTL, session, redis.print);
@@ -112,9 +112,10 @@ app.post('/keys', function (req, res){
 			console.log(ursaKey.toPublicPem().toString());
 			client.set('admin', name, redis.print);
 			client.set('key_' + name, 0, redis.print);
-			res.send(200, {message : "key added as admin"});
+			res.send(200, "key added as admin");
 		} else {
-			res.send(404, {message : "admin already exist require access"});
+			console.log('admin already exist cant accept more');
+			res.send(404,"admin already exist require access");
 		}
 	});
 
