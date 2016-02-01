@@ -12,11 +12,11 @@ module.exports = function initialize (params) {
                     if (item == 1) {
                         next();
                     } else {
-                        res.send(403, {message : "UNAUTHORIZE, request access"});
+                        res.status(404).send("UNAUTHORIZE, request access");
                     }
                 });
             }
-            else res.send(403, {message : "UNAUTHORIZE, request access"});
+            else res.status(404).send("UNAUTHORIZE, request access");
         });
     }
 
