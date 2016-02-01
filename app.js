@@ -113,10 +113,10 @@ app.post('/keys', function (req, res){
 			client.set('admin', name, redis.print);
 			client.set('key_' + name, 1, redis.print);
 			console.log(colors.green("KEY ADDED CORRECTLY"));
-			res.status(200).send("key added as admin");
+			res.send("key added as admin");
 		} else {
 			console.log('admin already exist cant accept more');
-			res.status(404).send("admin already exist require access");
+			res.send("admin already exist require access");
 		}
 	});
 
