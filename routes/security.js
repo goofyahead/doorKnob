@@ -3,8 +3,8 @@ module.exports = function initialize (params) {
     var redisClient = params.redis;
     
     module.authorize = function (req, res, next) {
-        var challenge = req.query.challenge;
-        var user = req.query.user;
+        var challenge = req.get('Authorization');
+        var user = req.get('user');
 
         redisClient.get('user_session_' + user, function (err, item) {
             if (item == challenge) {
