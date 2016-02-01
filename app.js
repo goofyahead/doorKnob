@@ -5,6 +5,7 @@ var ursa = require('ursa');
 var http = require('http');
 var https = require('https');
 var crypto = require('crypto');
+var TTL = 5 * 60;
 var header = '-----BEGIN PUBLIC KEY-----\n';
 var ending = '\n-----END PUBLIC KEY-----\n';
 var cookieParser = require('cookie-parser');
