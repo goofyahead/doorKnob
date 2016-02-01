@@ -43,6 +43,10 @@ var TWO_TURNS = 200 * 3; // two turns on a 1:3 gear of a 200 steps
 
 sleep.writeSync(0); // start sleeping
 
+app.get('/status', function (req, res) {
+	res.send({position: keyPosition});
+});
+
 app.get('/challenge/:user', function (req, res) {
 	var name = req.params.user;
 	var session = crypto.randomBytes(6).toString('hex').toString().toUpperCase();
