@@ -111,7 +111,7 @@ app.post('/keys', function (req, res){
 
 			console.log(ursaKey.toPublicPem().toString());
 			client.set('admin', name, redis.print);
-			client.set('key_' + name, 0, redis.print);
+			client.set('key_' + name, 1, redis.print);
 			res.send(200, "key added as admin");
 		} else {
 			console.log('admin already exist cant accept more');
