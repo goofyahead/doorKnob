@@ -57,7 +57,7 @@ app.get('/challenge/:user', function (req, res) {
 	var keyFromFile = ursa.createPublicKey(fs.readFileSync(__dirname + '/keys/' + name + '.pub'));
 	var challenge = keyFromFile.encrypt(session , ursa.BASE64, ursa.BASE64, ursa.RSA_PKCS1_PADDING);
 	console.log(challenge.toString('BASE64'));
-	res.send(challenge.toString('BASE64'));
+	res.status(200).send({challenge : challenge.toString('BASE64')});
 });
 
 app.get('/open', security.authorize, function(req, res){
@@ -113,10 +113,10 @@ app.post('/keys', function (req, res){
 			client.set('admin', name, redis.print);
 			client.set('key_' + name, 1, redis.print);
 			console.log(colors.green("KEY ADDED CORRECTLY"));
-			res.send("key added as admin");
+			res.status(200).send("OK");
 		} else {
 			console.log('admin already exist cant accept more');
-			res.send("admin already exist require access");
+			res.status(404).send("NOK");
 		}
 	});
 
