@@ -105,7 +105,7 @@ app.post('/keys', function (req, res){
 		if (!reply) {
 			console.log(pemKey);
 			var ursaKey = ursa.createPublicKey(new Buffer(pemKey), ursa.BASE64);
-			fs.writeFileSync('./keys/' + name + '.pub', ursaKey.toPublicPem());
+			fs.writeFileSync(__dirname + '/keys/' + name + '.pub', ursaKey.toPublicPem());
 
 			console.log(ursaKey.toPublicPem().toString());
 			client.set('admin', name, redis.print);
