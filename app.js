@@ -103,6 +103,7 @@ app.post('/keys', function (req, res){
 
 	client.get('admin', function (reply) {
 		if (!reply) {
+			console.log(pemKey);
 			var ursaKey = ursa.createPublicKey(new Buffer(pemKey), ursa.BASE64);
 			fs.writeFileSync('./keys/' + name + '.pub', ursaKey.toPublicPem());
 
